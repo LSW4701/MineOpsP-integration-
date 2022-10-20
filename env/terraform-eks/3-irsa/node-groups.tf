@@ -17,7 +17,7 @@ module "node_group__app" {
   version = "0.14.0"
 
   cluster_name = module.cluster.name
-  name         = "${module.cluster.name}-app-v1.21"
+  name         = "${module.cluster.name}-app-v1.23"
 
   desired_size = 2  # autuscale 
   min_size     = 1

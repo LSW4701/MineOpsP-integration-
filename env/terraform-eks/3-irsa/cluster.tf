@@ -3,7 +3,7 @@ module "cluster" {
   version = "0.14.0"  # 0.13.0 버전에서 수정 
 
   name               = "apne2-mineops"
-  kubernetes_version = "1.21"
+  kubernetes_version = "1.23"
 
   subnet_ids   = local.subnet_groups["public"].ids
   service_cidr = "172.20.0.0/16"
