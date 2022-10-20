@@ -3,3 +3,6 @@ variable "config_file" {
   type        = string
   default     = "./config.yaml"
 }
+
+variable "private_subnet_tags" {}
+variable "public_subnet_tags" {}

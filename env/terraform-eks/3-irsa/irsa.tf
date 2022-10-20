@@ -14,6 +14,24 @@ module "irsa__irsa_test" {
   }
 }
 
+module "irsa__EKS_test" {  # 내가만든 EKS
+  source  = "tedilabs/container/aws//modules/eks-irsa"
+  version = "0.14.0"
+
+  name        = "irsa-${module.cluster.name}-app-irsa__EKS_test"  #
+  description = "EKS IAM Role for Service Account of irsa__EKS_test app."
+
+  oidc_provider_urls       = [module.cluster.oidc_provider_urn]  # 클러스터 생성시 주어지는 oidc 값을 연결 
+  trusted_service_accounts = ["kube-system:ebs-csi-controller-sa"]   # 클러스터 내에서  kube-system  
+ 
+
+  inline_policies = {
+    "this" = file("policies/aws-ebs-csi-driver-trust-policy.json")
+  }
+}
+
+
+
 module "irsa__aws_load_balancer_controller" {
   source  = "tedilabs/container/aws//modules/eks-irsa"
   version = "0.14.0"
