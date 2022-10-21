@@ -59,21 +59,21 @@ module "node_group__app" {
 
 
 
-module "eks__user_data" {  # 구글링중...
-  source  = "terraform-aws-modules/eks/aws//modules/_user_data"
-  version = "18.30.2"
+# module "eks__user_data" {  # 구글링중...
+#   source  = "terraform-aws-modules/eks/aws//modules/_user_data"
+#   version = "18.30.2"
 
-  cluster_name = module.cluster.name
-  cluster_service_ipv4_cidr= "172.20.0.0/16"
-  user_data_template_path = "files/userdata.sh"
+#   cluster_name = module.cluster.name
+#   cluster_service_ipv4_cidr= "172.20.0.0/16"
+#   user_data_template_path = "files/userdata.sh"
 
 
 
-# openvpn_userdata = templatefile("${path.module}/files/userdata.sh", {
-#     vpc_cidr  = local.vpc.cidr_block
-#     public_ip = aws_eip.openvpn.public_ip
-#   })
+# # openvpn_userdata = templatefile("${path.module}/files/userdata.sh", {
+# #     vpc_cidr  = local.vpc.cidr_block
+# #     public_ip = aws_eip.openvpn.public_ip
+# #   })
 
-}
+# }
 
 
