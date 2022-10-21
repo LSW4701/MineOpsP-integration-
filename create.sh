@@ -55,7 +55,7 @@ rm -rf arn_tmp
 sed -i "s/input/$alb_arn2/1" ./rbac.yaml
 
 
-###########################################################################################
+########################################################################################### Helm
 
 cd $DIR
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
@@ -64,6 +64,36 @@ chmod 700 get_helm.sh
 
 curl -L https://git.io/get_helm.sh | bash -s -- --version v3.8.2
 ###########################################################################################
+
+
+############################################################################################ CSI Driver
+
+aws eks create-addon \
+  --cluster-name apne2-mineops \
+  --addon-name aws-ebs-csi-driver \
+  --service-account-role-arn arn:aws:iam::959714228357:role/irsa-apne2-mineops-app-irsa__EKS_test
+
+
+
+aws eks update-addon \
+  --cluster-name apne2-mineops \
+  --addon-name aws-ebs-csi-driver \
+  --addon-version v1.11.4-eksbuild.1 \
+  --resolve-conflicts OVERWRITE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # helm repo add stable https://itzg.github.io/minecraft-server-charts/
