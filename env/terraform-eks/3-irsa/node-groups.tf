@@ -22,9 +22,9 @@ module "node_group__app" {
   cluster_name = module.cluster.name
   name         = "${module.cluster.name}-app-v1.23-node"
   
-  desired_size = 2  # autuscale 
-  min_size     = 1
-  max_size     = 2
+  desired_size = 8  # autuscale 
+  min_size     = 3
+  max_size     = 12
 
   instance_type    = "t3.small"
   instance_ami     = "ami-0073aeb06ceb4b0dc"    # ami 최신 버전 매번 바뀌니 하드코딩 
