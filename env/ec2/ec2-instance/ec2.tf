@@ -57,3 +57,41 @@ resource "aws_instance" "openvpn" {
     Name = "${local.vpc.name}-web & openvpn"
   }
 }
+
+resource "aws_instance" "mineserver1" {
+  ami           = data.aws_ami.ubuntu.image_id
+  instance_type = "m4.large"
+  subnet_id     = local.subnet_groups["public"].ids[0]
+  key_name      = "linux_s" ##
+
+  user_data = local.openvpn_userdata
+
+  associate_public_ip_address = false
+  vpc_security_group_ids = [
+    module.sg__ssh.id,
+    module.sg__openvpn.id,
+  ]
+
+  tags = {
+    Name = "${local.vpc.name}-mineserver1"
+  }
+}
+
+resource "aws_instance" "mineserver2" {
+  ami           = data.aws_ami.ubuntu.image_id
+  instance_type = "m4.large"
+  subnet_id     = local.subnet_groups["public"].ids[0]
+  key_name      = "linux_s" ##
+
+  user_data = local.openvpn_userdata
+
+  associate_public_ip_address = false
+  vpc_security_group_ids = [
+    module.sg__ssh.id,
+    module.sg__openvpn.id,
+  ]
+
+  tags = {
+    Name = "${local.vpc.name}-mineserver2"
+  }
+}
