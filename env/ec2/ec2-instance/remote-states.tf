@@ -1,12 +1,3 @@
-data "terraform_remote_state" "network" {
-  backend = "s3"
-  config = {
-    bucket = var.backend_s3
-    key    = var.vpc_key
-    region = var.region
-  }
-}
-
 locals {
   remote_states = {
     "network" = data.terraform_remote_state.network.outputs
@@ -20,11 +11,10 @@ locals {
 # Terraform Remote States (External Dependencies)
 ###################################################
 
-# data "terraform_remote_state" "network" {
-#   backend = "local"
+data "terraform_remote_state" "network" {
+  backend = "local"
 
-#   config = {
-#     path = "${path.module}/../../terraform-aws-ubuntu/network/terraform.tfstate"
-#   }
-# }
-
+  config = {
+    path = "${path.module}/../../terraform-aws-ubuntu/network/terraform.tfstate"
+  }
+}

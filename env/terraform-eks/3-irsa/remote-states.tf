@@ -12,12 +12,9 @@ locals {
 ###################################################
 
 data "terraform_remote_state" "network" {
-  backend = "s3"
+  backend = "local"
+
   config = {
-    bucket = var.backend_s3
-    key    = var.vpc_key
-    region = var.region
+    path = "${path.module}/../../terraform-aws-ubuntu/network/terraform.tfstate"
   }
 }
-
-
