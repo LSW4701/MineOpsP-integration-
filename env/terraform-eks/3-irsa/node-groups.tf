@@ -26,7 +26,7 @@ module "node_group__app" {
   min_size     = 2
   max_size     = 8
 
-  instance_type    = "t3.small"
+  instance_type    = "t3.medium"
   instance_ami     = "ami-0073aeb06ceb4b0dc"    # ami 최신 버전 매번 바뀌니 하드코딩 
   instance_ssh_key = "linux_s" # 개인 public ssh 키
   instance_profile = module.cluster.iam_roles["node"].instance_profile_name
