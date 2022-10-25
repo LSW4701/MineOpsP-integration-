@@ -9,6 +9,7 @@ sudo apt-get install -y vim
 sudo apt-get install -y openssh-server
 sudo apt-get install -y git
 sudo apt-get install -y unzip
+sudo apt-get install -y docker-compose
 
 sudo apt-get install -y \
   apt-transport-https \
@@ -17,22 +18,19 @@ sudo apt-get install -y \
   gnupg \
   lsb-release
 
-################################################################################
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  #####################################################################
+
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
 
-
-
 sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-
+  #####################################################################
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update
 sudo apt-get install -y kubectl
 
-
-################################################################################
-
+  #####################################################################
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
@@ -73,12 +71,7 @@ done
 ## Generate OpenVPN client configuration file
 docker exec openvpn show-client-config > minevpn.ovpn
 
-
-
-
-#################
-
-
+##########################
 echo 'source <(kubectl completion bash)' >>~/.bashrc
 echo 'alias k=kubectl' >>~/.bashrc
 echo 'complete -F __start_kubectl k' >>~/.bashrc
